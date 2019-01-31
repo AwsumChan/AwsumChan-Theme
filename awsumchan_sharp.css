@@ -1,0 +1,146 @@
+img.banner, img.board_image {
+  border: none;
+}
+
+nav.menu-bar {
+  max-width: 700px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+nav.menu-bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav.menu-bar li {
+  display: inline-block;
+  float: none;
+}
+
+nav.menu-bar li:not(:first-child) {
+  margin-left: 15px;
+}
+
+nav.menu-bar li:not(:last-child) {
+  margin-right: 15px;
+}
+
+nav.menu-bar li a {
+  background-color: #DDD;
+  font-size: 12pt;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  padding: 3px 7px;
+  border: 1px solid #CCC;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+nav.menu-bar li.active a {
+  color: #36362E;
+  cursor: default;
+}
+
+.columns {
+  display: grid;
+  width: 100%;
+}
+
+div.category > h3 {
+  margin: 0;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+div.category > ul {
+  padding: 0 20px 20px 20px;
+}
+
+#boards ul,
+#recent-content ul,
+#stats ul {
+  margin: 0;
+}
+
+#boards ul > li,
+#recent-content ul > li,
+#stats ul > li {
+  list-style-type: none;
+}
+
+div.category > ul > li > a,
+div.category > ul > li > a:visited {
+  color: #28759C;
+  text-decoration: none;
+}
+
+div.category > ul > li > a:hover,
+div.category > ul > li > a:active {
+  font-weight: bold;
+}
+
+#stats .columns,
+#recent-content ul {
+  padding: 0;
+}
+
+#stats .columns > li {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+#recent-content .columns > div {
+  padding: 10px 20px;
+}
+
+#recent-content div:first-child {
+  text-align: center;
+}
+
+#recent-content img {
+  float: none;
+  margin: 0;
+  display: inline-block;
+}
+
+#recent-content div:first-child li:not(:last-child) img {
+  margin-bottom: 10px;
+}
+
+#recent-content div:last-child li {
+  margin-bottom: 3px;
+}
+
+/* Columnize the content if it's on desktop */
+@media only screen and (min-width: 700px) {
+  #recent-content > .columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #boards > .columns,
+  #stats > .columns {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+div.ban h3 {
+    padding: 3px 7px;
+    margin: 7px 0 -7px 7px;
+}
+
+div.ban.alternate {
+  border-color: #9D090D;
+}
+
+div.ban.alternate h2 {
+  color: #FFF;
+  background-color: #AF0A0F;
+  text-shadow: none;
+}
+
+div.ban.alternate h2 a {
+  color: #FFF;
+}

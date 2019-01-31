@@ -1,0 +1,76 @@
+{% filter remove_whitespace %}
+<!doctype html>
+<html lang="{{ config.locale }}">
+<head>
+  <meta charset="utf-8">
+  {% include "header.html" with {"nojavascript": true} %}
+  <link rel="stylesheet" media="screen" href="{{ config.root }}{{ settings.file_css }}">
+  <title>{{ settings.title }}</title>
+</head>
+<body class="{% if mod %}is-moderator{% else %}is-not-moderator{% endif %}" data-stylesheet="{% if config.default_stylesheet.1 != '' %}{{ config.default_stylesheet.1 }}{% else %}default{% endif %}">
+  <header>
+    <h1>
+      <img class="banner" src="{{ config.root }}{{ settings.file_logo }}" alt="{{ settings.title }}">
+    </h1>
+    <div class="subtitle">{{ settings.subtitle }}</div>
+    <nav class="menu-bar">
+      <ul>
+        <li class="active">
+          <a href="{{ config.root }}{{ settings.file_index }}">Home</a>
+        </li>
+        <li>
+          <a href="{{ config.root }}{{ settings.file_news }}">News</a>
+        </li>
+        <li>
+          <a href="{{ config.root }}{{ settings.file_faq }}">FAQ</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="ban">
+    <h2 id="legal">Legal</h2>
+    <p>
+        AwsumChan takes no responsibility for what users post to our website.
+        However, we work hard to moderate and remove all illegal content from our services.
+        As our servers are based in the United States, users of our site are directed to
+        comply with all United States laws and regulations. User content published on this
+        website should be assumed works of fiction and falsehood &mdash; and should not be
+        taken literally. AwsumChan and its staff are not responsible in any way
+        for damages of any form. User access to this site is a privilege determined by our
+        staff via site rules. Failure to comply with site rules or government laws and
+        regulations will result in either a temporary or permanent ban, determined at the
+        discretion of the staff. The views and opinions posted to awsumchan.org do not
+        represent the views of the AwsumChan administration or its staff. If you have any
+        questions regarding our rules, regulations, or policies, create a post
+        <a href="https://awsumchan.org/aw/">here</a>.
+    </p>
+    <h2 id="global-rules">Global Rules</h2>
+    <p>
+        These rules apply to boards of <em style="text-decoration:underline">all categories</em>.
+        <ol>
+            <li>You must be legal age to view adult material in your country, state, or province of residence.</li>
+            <li>Do not spam or flood the boards</li>
+            <li>
+                Do not post, request, or link to any illegal content. This includes child pornography, revenge porn, or pirated copyright content.
+                <strong>Violation will result in a permanent ban from all boards.</strong>
+            </li>
+            <li>Content that doesn't fit in any particular board, belongs in <a href="https://awsumchan.org/ra/">/ra/</a>.</li>
+            <li>Keep all non-worksafe content in the NSFW categorized boards.</li>
+            <li><strong style="font-weight:bold">As with 4chan, 7chan, or any other imageboard &mdash; please use common sense!</strong></li>
+        </ol>
+    </p>
+  </div>
+
+  <div class="ban">
+      <p>More content is to be added soon.</p>
+  </div>
+  
+  <hr/>
+  <footer>
+    <p class="unimportant" style="margin-top:20px;text-align:center;">Powered by Tinyboard {{ config.version }}
+    <br>Tinyboard Copyright &copy; 2010-2019 Tinyboard Development Group    
+  </footer>
+</body>
+</html>
+{% endfilter %}
