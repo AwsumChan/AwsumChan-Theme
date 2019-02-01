@@ -132,9 +132,9 @@
 		'title' => 'CSS stylesheet name',
 		'name' => 'basecss',
 		'type' => 'text',
-		'default' => 'awsumchan-sharp.css',
-		'comment' => '(eg. "awsumchan-sharp.css" - see templates/themes/awsumchan for details)'
-	      ];
+		'default' => 'awsumchan_sharp.css',
+		'comment' => '(eg. "awsumchan_sharp.css" - see templates/themes/awsumchan for details)'
+	];
 	
 	// Unique function name for building everything
 	$theme['build_function'] = 'awsumchan_build';
