@@ -126,11 +126,6 @@ div.category > ul > li > a:active {
   }
 }
 
-div.ban h3 {
-    padding: 3px 7px;
-    margin: 7px 0 -7px 7px;
-}
-
 div.ban.alternate {
   border-color: #9D090D;
 }
