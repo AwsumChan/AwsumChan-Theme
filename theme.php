@@ -213,7 +213,7 @@
     {
       global $config;
 
-      return Element('themes/awsumchan/news.html', [
+      return Element('themes/awsumchan/faq.html', [
         'settings' => $settings,
         'config' => $config,
         'mod' => false,
