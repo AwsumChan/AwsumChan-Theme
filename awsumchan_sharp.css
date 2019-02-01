@@ -1,5 +1,6 @@
 img.banner, img.board_image {
   border: none;
+  max-width: 100%;
 }
 
 nav.menu-bar {
@@ -79,6 +80,7 @@ div.category > ul > li > a:visited {
 
 div.category > ul > li > a:hover,
 div.category > ul > li > a:active {
+  color: #28759C;
   font-weight: bold;
 }
 
