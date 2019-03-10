@@ -147,33 +147,24 @@
       
       // Total posts
       $query = 'SELECT SUM(`top`) FROM (';
-      foreach ($boards as &$_board) {
-        if (in_array($_board['uri'], $this->excluded))
-          continue;
+      foreach ($boards as &$_board)
         $query .= sprintf("SELECT MAX(`id`) AS `top` FROM ``posts_%s`` UNION ALL ", $_board['uri']);
-      }
       $query = preg_replace('/UNION ALL $/', ') AS `posts_all`', $query);
       $query = query($query) or error(db_error());
       $stats['total_posts'] = number_format($query->fetchColumn());
       
       // Unique IPs
       $query = 'SELECT COUNT(DISTINCT(`ip`)) FROM (';
-      foreach ($boards as &$_board) {
-        if (in_array($_board['uri'], $this->excluded))
-          continue;
+      foreach ($boards as &$_board)
         $query .= sprintf("SELECT `ip` FROM ``posts_%s`` UNION ALL ", $_board['uri']);
-      }
       $query = preg_replace('/UNION ALL $/', ') AS `posts_all`', $query);
       $query = query($query) or error(db_error());
       $stats['unique_posters'] = number_format($query->fetchColumn());
       
       // Active content
       $query = 'SELECT DISTINCT(`files`) FROM (';
-      foreach ($boards as &$_board) {
-        if (in_array($_board['uri'], $this->excluded))
-          continue;
+      foreach ($boards as &$_board)
         $query .= sprintf("SELECT `files` FROM ``posts_%s`` UNION ALL ", $_board['uri']);
-      }
       $query = preg_replace('/UNION ALL $/', ' WHERE `num_files` > 0) AS `posts_all`', $query);
       $query = query($query) or error(db_error());
       $files = $query->fetchAll();
