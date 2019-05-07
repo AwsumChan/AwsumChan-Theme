@@ -6,6 +6,7 @@
   {% include "header.html" with {"nojavascript": true} %}
   <link rel="stylesheet" media="screen" href="{{ config.root }}{{ settings.file_css }}">
   <title>{{ settings.title }}</title>
+  <script type="module" src="{{ config.root }}{{ settings.file_js }}"></script>
 </head>
 <body class="{% if mod %}is-moderator{% else %}is-not-moderator{% endif %}" data-stylesheet="{% if config.default_stylesheet.1 != '' %}{{ config.default_stylesheet.1 }}{% else %}default{% endif %}">
   <header>
@@ -56,13 +57,16 @@
   </div>
 
   <div class="ban" id="recent-content">
+    <span style="float:right;padding:2px">
+      <a class="unimportant" id="toggle-nsfw" href="#">[show nsfw content]</a>
+    </span>
     <h2>Recent Content</h2>
     <div class="columns">
       {# Recent Images #}
       <div>
         <ul>
           {% for post in recent_images %}
-            <li>
+            <li{% if post.nsfw == 1 %} class="nsfw"{% endif %}>
               <a href="{{ post.link }}">
                 <img src="{{ post.src }}" style="width:{{ post.thumbwidth }}px;height:{{ post.thumbheight }}px" alt="">
               </a>
@@ -74,7 +78,7 @@
       <div>
         <ul>
           {% for post in recent_posts %}
-            <li>
+            <li{% if post.nsfw == 1 %} class="nsfw"{% endif %}>
               <strong>{{ post.board_name }}</strong>:
               <a href="{{ post.link }}">{{ post.snippet }}</a>
             </li>

@@ -1,3 +1,8 @@
+/**
+ * awsumchan_sharp.css
+ * @author Circlepuller <admin@awsumchan.org>
+ */
+ 
 img.banner, img.board_image {
   border: none;
   max-width: 100%;
@@ -140,4 +145,8 @@ div.ban.alternate h2 {
 
 div.ban.alternate h2 a {
   color: #FFF;
+}
+
+li.nsfw {
+  display: none;
 }

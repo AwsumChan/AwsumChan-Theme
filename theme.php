@@ -16,6 +16,10 @@
   
   // Wrap functions in a class so they don't interfere with normal Tinyboard operations
   class AwsumChan {
+    private $news;
+    private $excluded_boards;
+    private $nsfw_boards;
+
     public function build($action, $settings) {
       global $config, $_theme;
 
@@ -24,6 +28,7 @@
       
       if ($action === 'all') {
         copy('templates/themes/awsumchan/' . $settings['basecss'], $config['dir']['home'] . $settings['file_css']);
+        copy('templates/themes/awsumchan/awsumchan.js', $config['dir']['home'] . $settings['file_js']);
         
         if ($settings['file_logo'] !== '')
           copy('templates/themes/awsumchan/logo.png', $config['dir']['home'] . $settings['file_logo']);
@@ -44,7 +49,8 @@
       $query = query('SELECT * FROM ``news`` ORDER BY `time` DESC' . ($settings['no_recent'] ? ' LIMIT ' . $settings['no_recent'] : '')) or error(db_error());
       $this->news = $query->fetchAll(PDO::FETCH_ASSOC);
       
-      $this->excluded = explode(' ', $settings['exclude']);
+      $this->excluded_boards = explode(' ', $settings['excluded_boards']);
+      $this->nsfw_boards = explode(' ', $settings['nsfw_boards']);
       
       if ($action === 'all' || $action === 'news' || $action === 'boards' || $action === 'post' || $action === 'post-thread' || $action === 'post-delete')
         file_write($config['dir']['home'] . $settings['file_index'], $this->homepage($settings));
@@ -81,9 +87,13 @@
       
       $query = '';
       foreach ($boards as &$_board) {
-        if (in_array($_board['uri'], $this->excluded))
+        if (in_array($_board['uri'], $this->excluded_boards))
           continue;
-        $query .= sprintf("SELECT *, '%s' AS `board` FROM ``posts_%s`` WHERE `files` IS NOT NULL UNION ALL ", $_board['uri'], $_board['uri']);
+
+        $query .= sprintf("SELECT *, '%s' AS `board`, %d AS `nsfw` FROM ``posts_%s`` WHERE `files` IS NOT NULL UNION ALL ",
+                          $_board['uri'],
+                          (int)in_array($_board['uri'], $this->nsfw_boards),
+                          $_board['uri']);
       }
       $query = preg_replace('/UNION ALL $/', 'ORDER BY `time` DESC LIMIT ' . (int)$settings['limit_images'], $query);
       
@@ -99,7 +109,9 @@
         if (isset($post['files']))
           $files = json_decode($post['files']);
 
-                if ($files[0]->file == 'deleted' || $files[0]->thumb == 'file') continue;
+        // TODO: Find a fallback if there's a deleted file in the query
+        if ($files[0]->file == 'deleted' || $files[0]->thumb == 'file')
+          continue;
         
         // board settings won't be available in the template file, so generate links now
         $post['link'] = $config['root'] . $board['dir'] . $config['dir']['res']
@@ -111,8 +123,7 @@
             $post['src'] = $config['spoiler_image'];
             $post['thumbwidth'] = $tn_size[0];
             $post['thumbheight'] = $tn_size[1];
-          }
-          else {
+          } else {
             $post['src'] = $config['uri_thumb'] . $files[0]->thumb;
             $post['thumbwidth'] = $files[0]->thumbwidth;
             $post['thumbheight'] = $files[0]->thumbheight;
@@ -125,9 +136,13 @@
       
       $query = '';
       foreach ($boards as &$_board) {
-        if (in_array($_board['uri'], $this->excluded))
+        if (in_array($_board['uri'], $this->excluded_boards))
           continue;
-        $query .= sprintf("SELECT *, '%s' AS `board` FROM ``posts_%s`` UNION ALL ", $_board['uri'], $_board['uri']);
+
+        $query .= sprintf("SELECT *, '%s' AS `board`, %d AS `nsfw` FROM ``posts_%s`` UNION ALL ",
+                          $_board['uri'],
+                          (int)in_array($_board['uri'], $this->nsfw_boards),
+                          $_board['uri']);
       }
       $query = preg_replace('/UNION ALL $/', 'ORDER BY `time` DESC LIMIT ' . (int)$settings['limit_posts'], $query);
       $query = query($query) or error(db_error());

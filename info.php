@@ -5,7 +5,7 @@
 	$theme['name'] = 'AwsumChan';
 	// Description (you can use Tinyboard markup here)
 	$theme['description'] = 'A theme featuring a homepage with a board list and recent content, frames, news, and FAQ pages. Created specifically for AwsumChan.';
-	$theme['version'] = 'v2.0';
+	$theme['version'] = 'v2.1';
 	
 	// Theme configuration	
 	$theme['config'] = [];
@@ -34,7 +34,14 @@
 	
 	$theme['config'][] = [
 		'title' => 'Excluded boards',
-		'name' => 'exclude',
+		'name' => 'excluded_boards',
+		'type' => 'text',
+		'comment' => '(space seperated)'
+	];
+
+	$theme['config'][] = [
+		'title' => 'NSFW boards',
+		'name' => 'nsfw_boards',
 		'type' => 'text',
 		'comment' => '(space seperated)'
 	];
@@ -85,6 +92,14 @@
 		'type' => 'text',
 		'default' => 'awsumchan.css',
 		'comment' => '(eg. "awsumchan.css")'
+	];
+
+	$theme['config'][] = [
+		'title' => 'JavaScript file',
+		'name' => 'file_js',
+		'type' => 'text',
+		'default' => 'awsumchan.js',
+		'comment' => '(eg. "awsumchan.js")'
 	];
 
 	$theme['config'][] = [
