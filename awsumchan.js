@@ -5,7 +5,7 @@
 
 function init_nsfw()
 {
-  let nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || false;
+  var nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || false;
 
   if (nsfw) {
     document.getElementById('toggle-nsfw').textContent = '[hide nsfw content]';
@@ -15,7 +15,7 @@ function init_nsfw()
 
 function toggle_nsfw()
 {
-  let nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || false;
+  var nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || false;
 
   document.getElementById('toggle-nsfw').textContent = '[' + (nsfw ? 'show' : 'hide') + ' nsfw content]';
   document.querySelectorAll('li.nsfw').forEach(i => i.style.display = (nsfw ? 'none': 'block'));
