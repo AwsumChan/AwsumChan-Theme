@@ -5,9 +5,9 @@
 
 function init_nsfw()
 {
-  var nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || false;
+  let nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || 0;
 
-  if (nsfw === true) {
+  if (nsfw == 1) {
     document.getElementById('toggle-nsfw').textContent = '[hide nsfw content]';
     document.querySelectorAll('li.nsfw').forEach(i => i.style.display = 'block');
   }
@@ -17,11 +17,11 @@ function init_nsfw()
 
 function toggle_nsfw()
 {
-  var nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || false;
+  let nsfw = localStorage.getItem('awsumchan-nsfw-toggle') || 0;
 
-  document.getElementById('toggle-nsfw').textContent = '[' + (nsfw === true ? 'show' : 'hide') + ' nsfw content]';
-  document.querySelectorAll('li.nsfw').forEach(i => i.style.display = (nsfw === true ? 'none': 'block'));
-  localStorage.setItem('awsumchan-nsfw-toggle', nsfw === true ? false : true);
+  document.getElementById('toggle-nsfw').textContent = '[' + (nsfw == 1 ? 'show' : 'hide') + ' nsfw content]';
+  document.querySelectorAll('li.nsfw').forEach(i => i.style.display = (nsfw == 1 ? 'none': 'block'));
+  localStorage.setItem('awsumchan-nsfw-toggle', nsfw == 1 ? 0 : 1);
 }
 
-document.onload = init_nsfw;
+window.onload = init_nsfw;
