@@ -24,15 +24,6 @@
 	];
 	
 	$theme['config'][] = [
-		'title' => '# of recent entries',
-		'name' => 'no_recent',
-		'type' => 'text',
-		'default' => 0,
-		'size' => 3,
-		'comment' => '(number of recent news entries to display; "0" is infinite)'
-	];
-	
-	$theme['config'][] = [
 		'title' => 'Excluded boards',
 		'name' => 'excluded_boards',
 		'type' => 'text',

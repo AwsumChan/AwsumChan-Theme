@@ -24,7 +24,6 @@
       global $config, $_theme;
 
       $frames_enabled = ($settings['file_frames'] !== '' && $settings['file_sidebar'] !== '');
-      $settings['no_recent'] = (int)$settings['no_recent'];
       
       if ($action === 'all') {
         copy('templates/themes/awsumchan/' . $settings['basecss'], $config['dir']['home'] . $settings['file_css']);
@@ -46,7 +45,7 @@
         }
       }
 
-      $query = query('SELECT * FROM ``news`` ORDER BY `time` DESC' . ($settings['no_recent'] ? ' LIMIT ' . $settings['no_recent'] : '')) or error(db_error());
+      $query = query('SELECT * FROM ``news`` ORDER BY `time` DESC') or error(db_error());
       $this->news = $query->fetchAll(PDO::FETCH_ASSOC);
       
       $this->excluded_boards = explode(' ', $settings['excluded_boards']);
@@ -56,7 +55,7 @@
         file_write($config['dir']['home'] . $settings['file_index'], $this->homepage($settings));
       
       if ($action === 'all' || $action === 'news')
-        file_write($config['dir']['home'] . $settings['file_news'], $this->news($settings));
+        file_write($config['dir']['home'] . $settings['file_news'], $this->newspage($settings));
 
       if ($action === 'all')
         file_write($config['dir']['home'] . $settings['file_faq'], $this->faq($settings));
@@ -202,7 +201,7 @@
       ]);
     }
 
-    public function news($settings)
+    public function newspage($settings)
     {
       global $config;
 
