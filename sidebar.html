@@ -1,4 +1,4 @@
-{% filter remove_whitespace %}
+{% apply spaceless %}
 <!doctype html>
 <html lang="{{ config.locale }}">
 <head>
@@ -110,4 +110,4 @@
 	{% endif %}
 </body>
 </html>
-{% endfilter %}
+{% endapply %}

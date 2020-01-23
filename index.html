@@ -1,4 +1,4 @@
-{% filter remove_whitespace %}
+{% apply spaceless %}
 <!doctype html>
 <html lang="{{ config.locale }}">
 <head>
@@ -100,8 +100,8 @@
   <hr/>
   <footer>
     <p class="unimportant" style="margin-top:20px;text-align:center;">Powered by Tinyboard {{ config.version }}
-    <br>Tinyboard Copyright &copy; 2010-2019 Tinyboard Development Group    
+    <br>Tinyboard Copyright &copy; 2010-2020 Tinyboard Development Group    
   </footer>
 </body>
 </html>
-{% endfilter %}
+{% endapply %}

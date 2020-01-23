@@ -1,4 +1,4 @@
-{% filter remove_whitespace %}
+{% apply spaceless %}
 <!doctype html>
 <html lang="{{ config.locale }}">
 <head>
@@ -39,7 +39,7 @@
           {% else %}
             <em>no subject</em>
           {% endif %}
-          <span class="unimportant"> &mdash; by {{ entry.name }} at {{ entry.time|date(config.post_date, config.timezone) }}</span>
+          <span class="unimportant"> &mdash; by {{ entry.name }} at {{ entry.time|strftime(config.post_date, config.timezone) }}</span>
         </h2>
         <p>{{ entry.body }}</p>
       {% endfor %}
@@ -49,8 +49,8 @@
   <hr/>
   <footer>
     <p class="unimportant" style="margin-top:20px;text-align:center;">Powered by Tinyboard {{ config.version }}
-    <br>Tinyboard Copyright &copy; 2010-2019 Tinyboard Development Group    
+    <br>Tinyboard Copyright &copy; 2010-2020 Tinyboard Development Group    
   </footer>
 </body>
 </html>
-{% endfilter %}
+{% endapply %}
